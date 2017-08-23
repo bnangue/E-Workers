@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">e-Workers</string>
+    <string name="title_activity_home_page">HomePageActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    //facebook strings
+    <string name="facebook_application_id">165513384011208</string>
+    <string name="facebook_login_protocol_scheme">fb165513384011208</string>
+    <string name="ak_login_protocol_scheme" translatable="false">ak165513384011208</string>
+    <string name="facebook_provider_id" translatable="false">facebook.com</string>
+    <string name="password_provider_id" translatable="false">password</string>
+    <string name="facebook_app_id" translatable="false">165513384011208</string>
+    <string name="account_kit_client_token">9ebee9a5cf6e500f557c5c9ec28fafac</string>
+    <string name="progress_dialog_connecting">connecting...</string>
+
 </resources>
