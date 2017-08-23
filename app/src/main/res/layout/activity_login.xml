@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,8 +7,14 @@
     tools:context="com.bricenangue.insyconn.e_workers.activity.LoginActivity">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp">
 
         <Button
             android:layout_width="match_parent"
@@ -17,7 +23,17 @@
             android:onClick="onPhoneLogin"
             android:paddingLeft="5dp"
             android:paddingStart="5dp"
-            android:paddingRight="5dp"/>
+            android:paddingRight="5dp"
+            android:paddingEnd="5dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            style="@style/button"
+            android:text="@string/Login_Activity_button_phone"
+            android:drawableLeft="@drawable/ic_phone_white_24dp"
+            android:drawableStart="@drawable/ic_phone_white_24dp"/>
 
         <Button
             android:layout_width="match_parent"
@@ -27,7 +43,24 @@
             android:onClick="onEmailLogin"
             android:paddingLeft="5dp"
             android:paddingStart="5dp"
-            android:paddingRight="5dp"/>
+            android:paddingRight="5dp"
+            android:paddingEnd="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            style="@style/button"
+            android:text="@string/Login_Activity_button_email"
+            android:drawableStart="@drawable/ic_email_white_24dp"
+            android:drawableLeft="@drawable/ic_email_white_24dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:id="@+id/loginActivityDivider"
+            android:background="@color/colorDivider"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
     </RelativeLayout>
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

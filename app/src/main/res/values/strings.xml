@@ -16,5 +16,7 @@
     <string name="facebook_app_id" translatable="false">165513384011208</string>
     <string name="account_kit_client_token">9ebee9a5cf6e500f557c5c9ec28fafac</string>
     <string name="progress_dialog_connecting">connecting...</string>
+    <string name="Login_Activity_button_phone">Phone Number</string>
+    <string name="Login_Activity_button_email">Email Address</string>
 
 </resources>
