@@ -1,22 +1,141 @@
 <resources>
     <string name="app_name">e-Workers</string>
-    <string name="title_activity_home_page">HomePageActivity</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="action_settings">Settings</string>
 
     //facebook strings
     <string name="facebook_application_id">165513384011208</string>
     <string name="facebook_login_protocol_scheme">fb165513384011208</string>
     <string name="ak_login_protocol_scheme" translatable="false">ak165513384011208</string>
-    <string name="facebook_provider_id" translatable="false">facebook.com</string>
-    <string name="password_provider_id" translatable="false">password</string>
     <string name="facebook_app_id" translatable="false">165513384011208</string>
     <string name="account_kit_client_token">9ebee9a5cf6e500f557c5c9ec28fafac</string>
+    <string name="facebook_provider_id" translatable="false">facebook.com</string>
+
+
+    //Login
     <string name="progress_dialog_connecting">connecting...</string>
+    <string name="password_provider_id" translatable="false">password</string>
     <string name="Login_Activity_button_phone">Phone Number</string>
     <string name="Login_Activity_button_email">Email Address</string>
+    <string name="Login_Activity_button_go_to_portal">Portal</string>
+    <string name="Login_Activity_textview_Login_Title">Sign In or Sign Up with</string>
+
+
+    //ProjectManagerActivity
+    <string name="title_activity_project_manager">ProjectManagerActivity</string>
+    <string name="title_new_project">New Project</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_tasks">Tasks</string>
+
+    //HomePageActivity
+    <string name="title_activity_home_page">HomePageActivity</string>
+    <string name="action_settings">Settings</string>
+
+
+    //Drawer
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="HomePage_activity_drawer_text_Home">Home</string>
+    <string name="HomePage_activity_drawer_text_Company">Company</string>
+    <string name="HomePage_activity_drawer_text_Projects">Projects</string>
+    <string name="HomePage_activity_drawer_text_Infos">Infos</string>
+    <string name="HomePage_activity_drawer_text_Inbox">Inbox</string>
+    <string name="HomePage_activity_drawer_text_Settings">Settings</string>
+    <string name="HomePage_activity_drawer_text_Communicate">Communicate</string>
+    <string name="HomePage_activity_drawer_text_logout">Log Out</string>
+    <string name="HomePage_activity_drawer_text_Session">Session</string>
+
+    //CompanyActivity
+    <string name="title_activity_company">Company</string>
+    <string name="title_team">The Team</string>
+    <string name="title_my_profile">My Profile</string>
+    <string name="title_activity_settings_eworkers">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact
+        based on your message history
+    </string>
+
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string-array name="list_preference_entries">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
+
+    <string-array name="list_preference_entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="multi_select_list_preference_default_value" />
+
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
+    <string name="title_activity_inbox">Inbox</string>
+
+    //InboxActivity
+
+    <string name="action_search">Search</string>
+    <string name="action_delete">Delete</string>
+    <string name="Verification_editext_enter_code_hint">Enter your e-Workers-ID</string>
+    <string name="ClientVerfication_button_send_code_text">Send</string>
+    <string name="Verification_editext_enter_code_error_text">This field cannot be empty</string>
+    <string name="Verification_editext_enter_code_error_shortEntry">The code should be at least 8 character long</string>
+    <string name="HomePageActivity_button_log">Log Time</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

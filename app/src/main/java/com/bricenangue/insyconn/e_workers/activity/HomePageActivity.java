@@ -1,5 +1,6 @@
 package com.bricenangue.insyconn.e_workers.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bricenangue.insyconn.e_workers.R;
 import com.facebook.accountkit.Account;
@@ -22,21 +26,15 @@ import com.facebook.accountkit.AccountKitError;
 public class HomePageActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private TextView textViewNavName, textViewNavEmail;
+    private ImageView profilePicture;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -47,14 +45,30 @@ public class HomePageActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        View headerLayout = navigationView.getHeaderView(0);
+
+        textViewNavEmail = (TextView) headerLayout.findViewById(R.id.textView_nav_profile_email);
+         textViewNavName = (TextView) headerLayout.findViewById(R.id.textView_nav_profile_name);
+         profilePicture = (ImageView) headerLayout.findViewById(R.id.imageView_nav_profile_Picture);
+
         AccountKit.getCurrentAccount(new AccountKitCallback<Account>() {
             @Override
             public void onSuccess(Account account) {
                 //fetch user information
+                if (account.getEmail()!=null){
+                    Toast.makeText(getApplicationContext(), account.getEmail() + "\n  "+ account.getId(),Toast.LENGTH_SHORT).show();
+
+                }else{
+                    Toast.makeText(getApplicationContext(), account.getPhoneNumber().toString(),Toast.LENGTH_SHORT).show();
+                    textViewNavName.setText(account.getPhoneNumber().toString());
+
+                }
             }
 
             @Override
             public void onError(AccountKitError accountKitError) {
+                Toast.makeText(getApplicationContext(),
+                        accountKitError.getErrorType().getMessage(),Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -86,6 +100,7 @@ public class HomePageActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            launchSettingsActivity();
             return true;
         }
 
@@ -98,18 +113,29 @@ public class HomePageActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_home) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_projects) {
 
-        } else if (id == R.id.nav_slideshow) {
+            launchProjectManagerActivity();
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_company) {
 
-        } else if (id == R.id.nav_share) {
+            launchCompanyActivity();
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_settings) {
 
+            launchSettingsActivity();
+
+        } else if (id == R.id.nav_inbox) {
+
+            launchInboxActivity();
+
+        } else if (id == R.id.nav_infos) {
+
+        } else if (id == R.id.nav_logout) {
+
+            onLogout();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -117,7 +143,30 @@ public class HomePageActivity extends AppCompatActivity
         return true;
     }
 
+    private void launchProjectManagerActivity() {
+        startActivity(new Intent(this,ProjectManagerActivity.class)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+
+
+    }
+    private void launchCompanyActivity() {
+        startActivity(new Intent(this,CompanyActivity.class)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+
+    }
+    private void launchSettingsActivity() {
+        startActivity(new Intent(this,SettingsEWorkersActivity.class)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+
+    }
+
+    private void launchInboxActivity() {
+        startActivity(new Intent(this,InboxActivity.class)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+
+    }
     private void onLogout(){
         AccountKit.logOut();
+        finish();
     }
 }

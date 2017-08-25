@@ -3,34 +3,49 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_48dp"
+            android:title="@string/HomePage_activity_drawer_text_Home" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/nav_projects"
+            android:icon="@drawable/ic_work_black_48dp"
+            android:title="@string/HomePage_activity_drawer_text_Projects" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_company"
+            android:icon="@drawable/ic_group_black_48dp"
+            android:title="@string/HomePage_activity_drawer_text_Company" />
+
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/HomePage_activity_drawer_text_Communicate">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_inbox"
+                android:icon="@drawable/ic_email_black_48dp"
+                android:title="@string/HomePage_activity_drawer_text_Inbox" />
+
         </menu>
     </item>
+
+    <item android:title="@string/HomePage_activity_drawer_text_Session">
+
+        <menu android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_infos"
+                android:icon="@drawable/ic_info_black_48dp"
+                android:title="@string/HomePage_activity_drawer_text_Infos" />
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_settings_black_48dp"
+                android:title="@string/HomePage_activity_drawer_text_Settings" />
+
+            <item android:title="@string/HomePage_activity_drawer_text_logout"
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_power_settings_new_black_48dp"/>
+        </menu>
+
+    </item>
+
+
 
 </menu>

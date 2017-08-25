@@ -9,5 +9,5 @@
     <stroke
         android:width="0dip"
         android:color="#FFFFFF" />
-    <corners android:radius= "200dp" />
+    <corners android:radius= "100dp" />
 </shape>

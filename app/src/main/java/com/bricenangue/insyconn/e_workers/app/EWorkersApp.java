@@ -6,6 +6,7 @@ import android.support.multidex.MultiDex;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.firebase.client.Firebase;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -26,7 +27,7 @@ public class EWorkersApp extends Application {
 
         FacebookSdk.sdkInitialize(this);
         AppEventsLogger.activateApp(this);
-       // Firebase.setAndroidContext(this);
+        Firebase.setAndroidContext(this);
         //register for app notification topic to receive updates about app
         // FirebaseMessaging.getInstance().subscribeToTopic("com.bricenangue.nextgeneration.ebuycamer");
 
