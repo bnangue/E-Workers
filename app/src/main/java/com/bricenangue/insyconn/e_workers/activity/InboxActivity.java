@@ -8,19 +8,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -31,7 +25,7 @@ import com.bricenangue.insyconn.e_workers.adapter.MessagesAdapter;
 import com.bricenangue.insyconn.e_workers.helper.DividerItemDecoration;
 import com.bricenangue.insyconn.e_workers.model.Message;
 import com.bricenangue.insyconn.e_workers.network.ApiClient;
-import com.bricenangue.insyconn.e_workers.network.ApiInterface;
+import com.bricenangue.insyconn.e_workers.interfaces.ApiInterface;
 
 import retrofit2.Call;
 import retrofit2.Callback;

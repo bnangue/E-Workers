@@ -1,4 +1,4 @@
-package com.bricenangue.insyconn.e_workers.network;
+package com.bricenangue.insyconn.e_workers.interfaces;
 
 import com.bricenangue.insyconn.e_workers.model.Message;
 

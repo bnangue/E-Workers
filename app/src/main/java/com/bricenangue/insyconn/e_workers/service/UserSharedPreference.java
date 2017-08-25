@@ -44,13 +44,26 @@ public class UserSharedPreference {
         spEditor.apply();
     }
 
-
-
-
-
     public boolean getEmailVerified(){
         return userLocalDataBase.getBoolean("verified", false);
     }
+
+
+    public void setisArrived(boolean isarrived){
+        SharedPreferences.Editor spEditor=userLocalDataBase.edit();
+        spEditor.putBoolean("isarrived",isarrived);
+
+        spEditor.apply();
+    }
+
+
+
+
+
+    public boolean getisArrived(){
+        return userLocalDataBase.getBoolean("isarrived", false);
+    }
+
 
     public void storeUserData(User user){
         SharedPreferences.Editor spEditor=userLocalDataBase.edit();

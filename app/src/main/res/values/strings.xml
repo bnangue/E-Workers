@@ -136,6 +136,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="textView_hompage_logIn_timeOfDay">Logged in at :</string>
+    <string name="textView_hompage_logIn_since">Logged in since :</string>
+    <string name="textView_hompage_logIn_timeOfDay_default_text">-- : -- : --</string>
 
 
 </resources>

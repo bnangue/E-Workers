@@ -11,10 +11,10 @@ import com.bricenangue.insyconn.e_workers.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MyProfileFragment#newInstance} factory method to
+ * Use the {@link CompanyFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MyProfileFragment extends Fragment {
+public class CompanyFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -25,7 +25,7 @@ public class MyProfileFragment extends Fragment {
     private String mParam2;
 
 
-    public MyProfileFragment() {
+    public CompanyFragment() {
         // Required empty public constructor
     }
 
@@ -33,14 +33,12 @@ public class MyProfileFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-
-     * @return A new instance of fragment MyProfileFragment.
+     * @return A new instance of fragment CompanyFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MyProfileFragment newInstance() {
-        MyProfileFragment fragment = new MyProfileFragment();
+    public static CompanyFragment newInstance() {
+        CompanyFragment fragment = new CompanyFragment();
         Bundle args = new Bundle();
-
         fragment.setArguments(args);
         return fragment;
     }
@@ -58,7 +56,7 @@ public class MyProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_profile, container, false);
+        return inflater.inflate(R.layout.fragment_company, container, false);
     }
 
 }
