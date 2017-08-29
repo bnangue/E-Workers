@@ -9,9 +9,10 @@
     <color name="colorIcons">#212121</color>
     <color name="colorDivider">#BDBDBD</color>
 
-    <color name="black">#000</color>
     <color name="grey_light">#aeaeae</color>
-
+    <color name="light_black">#504f4f</color>
+    <color name="black">#000000</color>
+    <color name="blue">#2957ed</color>
     <color name="white">#fff</color>
 
     //added for InBox

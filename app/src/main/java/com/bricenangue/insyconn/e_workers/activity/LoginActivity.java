@@ -2,6 +2,7 @@ package com.bricenangue.insyconn.e_workers.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -137,6 +138,7 @@ public class LoginActivity extends AppCompatActivity {
                         Map<String,Object> children=new HashMap<>();
 
                         final User userfb=new User();
+                        userfb.setLast_logging(System.currentTimeMillis());
                         userfb.setId(account.getId());
                         String eWorkerID= userSharedPreference.getUserEWorkerID();
                         if (eWorkerID !=null && !eWorkerID.isEmpty()){
@@ -150,6 +152,7 @@ public class LoginActivity extends AppCompatActivity {
                             children.put("/account_id",userfb.getId());
                             children.put("/loginType",userfb.getLoginType());
                             children.put("/eWorkerID",userfb.geteWorkerID());
+                            children.put("/last_logging",userfb.getLast_logging());
 
                             reference.updateChildren(children).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -170,6 +173,7 @@ public class LoginActivity extends AppCompatActivity {
                             children.put("/account_id",userfb.getId());
                             children.put("/loginType",userfb.getLoginType());
                             children.put("/eWorkerID",userfb.geteWorkerID());
+                            children.put("/last_logging",userfb.getLast_logging());
 
                             reference.updateChildren(children).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

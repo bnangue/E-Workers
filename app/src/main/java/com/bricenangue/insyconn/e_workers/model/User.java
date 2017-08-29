@@ -10,6 +10,7 @@ public class User {
     private String id;
     private String loginType;
     private String eWorkerID;
+    private long last_logging; // erquired to enter email or phone number
 
     public User() {
     }
@@ -39,5 +40,13 @@ public class User {
 
     public void seteWorkerID(String eWorkerID) {
         this.eWorkerID = eWorkerID;
+    }
+
+    public long getLast_logging() {
+        return last_logging;
+    }
+
+    public void setLast_logging(long last_logging) {
+        this.last_logging = last_logging;
     }
 }

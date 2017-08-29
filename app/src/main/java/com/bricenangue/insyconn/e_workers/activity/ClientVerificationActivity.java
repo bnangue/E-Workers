@@ -25,6 +25,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ClientVerificationActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
@@ -95,22 +98,47 @@ public class ClientVerificationActivity extends AppCompatActivity {
     private void verify(String verificationCode){
         showProgressbar();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference reference =database.getReference("Verification_Codes").child(verificationCode);
+        final DatabaseReference reference =database.getReference("Verification_Codes")
+                .child(verificationCode);
 
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child("status").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
-                    //user exists
+                    //user exists. check if it's the first time
+                    reference.child("registration_date").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()){
+                                // user already registered once
+                                startActivity(new Intent(ClientVerificationActivity.this,LoginActivity.class)
+                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                userSharedPreference.storeUserEWorkerID(eWorkerID);
+                                dismissProgressbar();
+                                finish();
+                            }else {
+                                //first registration save current time as registration date
+                                Map<String,Object> children=new HashMap<>();
+                                children.put("/status",true);
+                                children.put("/registration_date", System.currentTimeMillis());
+                                reference.updateChildren(children);
 
-                        reference.setValue(true);
-                        startActivity(new Intent(ClientVerificationActivity.this,LoginActivity.class)
-                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                    userSharedPreference.storeUserEWorkerID(eWorkerID);
-                    dismissProgressbar();
-                    finish();
+                                startActivity(new Intent(ClientVerificationActivity.this,LoginActivity.class)
+                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                userSharedPreference.storeUserEWorkerID(eWorkerID);
+                                dismissProgressbar();
+                                finish();
+                            }
+                        }
 
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            Toast.makeText(ClientVerificationActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                            dismissProgressbar();
+                        }
+                    });
 
                 }else {
                     Toast.makeText(ClientVerificationActivity.this, "This e-Worker-ID Doesn't exist. Please request a verification code from your employer", Toast.LENGTH_SHORT).show();

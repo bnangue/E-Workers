@@ -3,6 +3,7 @@ package com.bricenangue.insyconn.e_workers.activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -15,11 +16,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bricenangue.insyconn.e_workers.R;
 import com.bricenangue.insyconn.e_workers.alertdialog.DialogTimeLogger;
+import com.bricenangue.insyconn.e_workers.helper.CountUpTimer;
 import com.bricenangue.insyconn.e_workers.interfaces.OnDialogSelectorListener;
 import com.bricenangue.insyconn.e_workers.service.UserSharedPreference;
 import com.facebook.accountkit.Account;
@@ -38,6 +41,11 @@ public class HomePageActivity extends AppCompatActivity
     private ImageView profilePicture;
     private DialogTimeLogger timeLogger;
     private UserSharedPreference userSharedPreference;
+    private CountUpTimer timer;
+    ProgressBar myprogressBar;
+    TextView progressingTextView;
+    Handler progressHandler = new Handler();
+    int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +60,8 @@ public class HomePageActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
+        myprogressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressingTextView = (TextView) findViewById(R.id.progress_circle_text);
         textViewLoggedAt=(TextView) findViewById(R.id.textView_hompage_logIn_timeOfDay_default_text);
         textViewTotalHours =(TextView) findViewById(R.id.textView_hompage_logIn_since_text);
 
@@ -61,6 +70,25 @@ public class HomePageActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         View headerLayout = navigationView.getHeaderView(0);
+
+        new Thread(new Runnable() {
+            public void run() {
+                while (i < 100) {
+                    i += 2;
+                    progressHandler.post(new Runnable() {
+                        public void run() {
+                            myprogressBar.setProgress(i);
+                            progressingTextView.setText("" + i + " %");
+                        }
+                    });
+                    try {
+                        Thread.sleep(300);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
 
         timeLogger =new DialogTimeLogger(this, new OnDialogSelectorListener() {
             @Override
@@ -73,12 +101,19 @@ public class HomePageActivity extends AppCompatActivity
                         String dateFormatted = formatter.format(date);
                         userSharedPreference.setisArrived(true);
                         textViewLoggedAt.setText(dateFormatted);
-
+                        timer = new CountUpTimer(8*60*60*1000) {
+                            @Override
+                            public void onTick(long elapsedTime) {
+                                textViewTotalHours.setText(String.valueOf(elapsedTime));
+                            }
+                        };
+                        timer.start();
 
 
                         break;
                     case 1:
                         //stop timer until next arriving check if same day. save in preference reset everyday
+                        timer.stop();
                         break;
                     case 2:
                         //stop timer and save total hours
