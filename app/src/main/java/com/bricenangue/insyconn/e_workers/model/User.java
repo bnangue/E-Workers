@@ -9,8 +9,9 @@ import com.facebook.accountkit.PhoneNumber;
 public class User {
     private String id;
     private String loginType;
-    private String eWorkerID;
-    private long last_logging; // erquired to enter email or phone number
+    private String eWorkerID;// required to enter email or phone number
+    private long last_logging;
+    private String profilePicture;
 
     public User() {
     }
@@ -48,5 +49,13 @@ public class User {
 
     public void setLast_logging(long last_logging) {
         this.last_logging = last_logging;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
     }
 }

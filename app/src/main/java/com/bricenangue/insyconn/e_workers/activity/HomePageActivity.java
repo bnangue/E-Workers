@@ -24,11 +24,18 @@ import com.bricenangue.insyconn.e_workers.R;
 import com.bricenangue.insyconn.e_workers.alertdialog.DialogTimeLogger;
 import com.bricenangue.insyconn.e_workers.helper.CountUpTimer;
 import com.bricenangue.insyconn.e_workers.interfaces.OnDialogSelectorListener;
+import com.bricenangue.insyconn.e_workers.model.UserData;
 import com.bricenangue.insyconn.e_workers.service.UserSharedPreference;
+import com.bumptech.glide.Glide;
 import com.facebook.accountkit.Account;
 import com.facebook.accountkit.AccountKit;
 import com.facebook.accountkit.AccountKitCallback;
 import com.facebook.accountkit.AccountKitError;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -137,7 +144,8 @@ public class HomePageActivity extends AppCompatActivity
 
                 }else{
                     Toast.makeText(getApplicationContext(), account.getPhoneNumber().toString(),Toast.LENGTH_SHORT).show();
-                    textViewNavName.setText(account.getPhoneNumber().toString());
+                    textViewNavEmail.setText(account.getPhoneNumber().toString());
+                    loadProfile();
 
                 }
             }
@@ -156,6 +164,45 @@ public class HomePageActivity extends AppCompatActivity
         dialog.show();
     }
 
+    private void loadProfile(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
+                .child("UserData")
+                .child(userSharedPreference.getUserEmployeePosition().getCompanyName())
+                .child(userSharedPreference.getLoggedInUser().getId());
+
+        reference.child("name").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot!=null){
+                    textViewNavName.setText(dataSnapshot.getValue(String.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(getApplicationContext(),databaseError.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+        reference.child("profilePicture").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot!=null){
+                    Glide.with(getApplicationContext())
+                            .load(dataSnapshot.getValue(String.class))
+                            .asBitmap()
+                            .centerCrop()
+                            .placeholder(R.drawable.com_facebook_profile_picture_blank_square)
+                            .into(profilePicture);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(getApplicationContext(),databaseError.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

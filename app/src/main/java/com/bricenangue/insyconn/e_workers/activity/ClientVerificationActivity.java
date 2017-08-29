@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bricenangue.insyconn.e_workers.R;
+import com.bricenangue.insyconn.e_workers.model.EmployeePosition;
 import com.bricenangue.insyconn.e_workers.service.UserSharedPreference;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -97,7 +98,7 @@ public class ClientVerificationActivity extends AppCompatActivity {
     }
     private void verify(String verificationCode){
         showProgressbar();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference reference =database.getReference("Verification_Codes")
                 .child(verificationCode);
 
@@ -151,6 +152,22 @@ public class ClientVerificationActivity extends AppCompatActivity {
                 Toast.makeText(ClientVerificationActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                 dismissProgressbar();
 
+            }
+        });
+
+        reference.child("employee").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()){
+                    EmployeePosition employeePosition =dataSnapshot.getValue(EmployeePosition.class);
+                    userSharedPreference.storeUserEmployeePosition(employeePosition);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(ClientVerificationActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                dismissProgressbar();
             }
         });
     }

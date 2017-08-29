@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bricenangue.insyconn.e_workers.fragment.MyProfileFragment">
+    tools:context="com.bricenangue.insyconn.e_workers.fragment.MyProfileFragment"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
 
 
     <ImageView
@@ -11,28 +13,23 @@
         android:layout_width="0dp"
         android:layout_height="181dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/brice"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="70dp"
         android:layout_height="71dp"
         app:srcCompat="@drawable/insyconn_logo"
+        android:layout_marginEnd="16dp"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toBottomOf="@+id/imageView_Fragment_Profile_Header"
-        android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_Fragment_Profile_Header" />
 
@@ -40,12 +37,61 @@
         android:id="@+id/textView_Fragment_Profile_Header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Max Mustermann"
+        android:text=""
         android:textSize="17dp"
-        android:layout_marginLeft="27dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_constraintTop_creator="1"
+        android:textStyle="bold"
         android:layout_marginStart="32dp"
+        tools:layout_constraintTop_creator="1"
         android:layout_marginTop="36dp"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_Fragment_Profile_Header" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView_Fragment_Profile_Header"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_Fragment_Profile_Address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textStyle="bold"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginTop="35dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView_Fragment_Profile_Header"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginStart="32dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_Fragment_Profile_zipCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textStyle="bold"
+        android:layout_marginStart="32dp"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginTop="38dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView_Fragment_Profile_Address"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_Fragment_Profile_Address_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Street / Street Number"
+        android:textSize="12sp"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/textView_Fragment_Profile_Address"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/textView_Fragment_Profile_Address" />
+
+    <TextView
+        android:id="@+id/textView_Fragment_Profile_zipCode_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Postal Code / City"
+        android:textSize="12sp"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/textView_Fragment_Profile_zipCode"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/textView_Fragment_Profile_zipCode" />
 </android.support.constraint.ConstraintLayout>

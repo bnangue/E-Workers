@@ -139,6 +139,8 @@
     <string name="textView_hompage_logIn_timeOfDay">Logged in at :</string>
     <string name="textView_hompage_logIn_since">Logged in since :</string>
     <string name="textView_hompage_logIn_timeOfDay_default_text">-- : -- : --</string>
+    <string name="action_add_favourite">Favorite</string>
+    <string name="action_play_next">Play</string>
 
 
 </resources>

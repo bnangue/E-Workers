@@ -3,6 +3,7 @@ package com.bricenangue.insyconn.e_workers.service;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.bricenangue.insyconn.e_workers.model.EmployeePosition;
 import com.bricenangue.insyconn.e_workers.model.User;
 
 /**
@@ -29,6 +30,24 @@ public class UserSharedPreference {
         return userLocalDataBase.getString("e_Worker_ID", "");
 
     }
+
+    public void storeUserEmployeePosition(EmployeePosition employeePosition){
+        SharedPreferences.Editor spEditor=userLocalDataBase.edit();
+        spEditor.putString("companyName",employeePosition.getCompanyName());
+        spEditor.putString("departmentName",employeePosition.getDepartmentName());
+        spEditor.putString("position",employeePosition.getPosition());
+        spEditor.apply();
+    }
+
+    public EmployeePosition getUserEmployeePosition(){
+
+        String companyName= userLocalDataBase.getString("companyName", "");
+        String departmentName= userLocalDataBase.getString("departmentName", "");
+        String position= userLocalDataBase.getString("position", "");
+
+        return new EmployeePosition(companyName, departmentName, position);
+    }
+
 
     public void clearUserData(){
         SharedPreferences.Editor spEditor=userLocalDataBase.edit();
