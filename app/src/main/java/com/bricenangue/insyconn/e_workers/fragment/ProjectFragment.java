@@ -4,11 +4,27 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bricenangue.insyconn.e_workers.R;
+import com.bricenangue.insyconn.e_workers.helper.DividerItemDecoration;
+import com.bricenangue.insyconn.e_workers.model.Project;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,8 +34,11 @@ import com.bricenangue.insyconn.e_workers.R;
  * Use the {@link ProjectFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProjectFragment extends Fragment {
+public class ProjectFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     public ProjectFragment() {
         // Required empty public constructor
@@ -49,10 +68,30 @@ public class ProjectFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_project, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_project, container, false);
+
+        recyclerView=(RecyclerView)view.findViewById(R.id.recycler_view_project_fragment);
+        swipeRefreshLayout=(SwipeRefreshLayout)view.findViewById(R.id.swipe_refresh_layout_project_fragment);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimaryDark);
+        swipeRefreshLayout.setOnRefreshListener(this);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        recyclerView.setHasFixedSize(false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+
+        return view;
     }
 
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        onRefresh();
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -67,4 +106,63 @@ public class ProjectFragment extends Fragment {
     }
 
 
+    @Override
+    public void onRefresh() {
+
+        swipeRefreshLayout.setRefreshing(true);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
+                .child("Projects")
+                .child("Innovations");
+
+        FirebaseRecyclerAdapter<Project, ProjectViewHolder> adapter =
+                new FirebaseRecyclerAdapter<Project, ProjectViewHolder>(
+                      Project.class,
+                        R.layout.project_item,
+                        ProjectViewHolder.class,
+                        reference
+                ) {
+            @Override
+            protected void populateViewHolder(ProjectViewHolder viewHolder, Project model, int position) {
+
+                if(getItemCount()==0){
+                    swipeRefreshLayout.setRefreshing(false);
+                }else if (position==getItemCount()-1){
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+
+                viewHolder.projectTitle.setText(model.getTitle());
+                long projectEnd = model.getProjectEnd(model.getProjectStartAndEnd());
+                Date projectDeadline= new Date(projectEnd);
+
+                DateFormat df = new SimpleDateFormat("dd MMMM", Locale.FRANCE);
+                viewHolder.projectEnd.setText(df.format(projectDeadline));
+                viewHolder.numberParticipant.setText(String.valueOf(model.getNumberParticipants()));
+                viewHolder.numberTasks.setText(String.valueOf(model.getNumberTasks()));
+
+            }
+        };
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+    }
+
+    public static class ProjectViewHolder extends RecyclerView.ViewHolder{
+        TextView projectTitle,numberParticipant, numberTasks, projectEnd;
+        private View view;
+
+
+
+        public ProjectViewHolder(View itemView) {
+            super(itemView);
+            view=itemView;
+
+
+            numberParticipant=(TextView) itemView.findViewById(R.id.textView_project_item_participant);
+            numberTasks=(TextView) itemView.findViewById(R.id.textView_project_item_tasks);
+            projectTitle=(TextView) itemView.findViewById(R.id.textView_project_item_title);
+            projectEnd=(TextView)itemView.findViewById(R.id.textView_project_item_deadline);
+
+
+        }
+    }
 }

@@ -7,12 +7,11 @@ import java.util.ArrayList;
  */
 
 public class Project {
-    private String title, projectID;
+    private String title, projectAndcreatorID;
     private String description;
-    private int priority; //0 normal - 1 high
+    private int priority, numberParticipants, numberTasks; //0 normal - 1 high
     private ArrayList<String> participantIDs, taskListIDs;
-    private String creatorID;
-    private Long start , deadline; //as timestamp
+    private String projectStartAndEnd;
 
     public Project() {
     }
@@ -25,12 +24,14 @@ public class Project {
         this.title = title;
     }
 
-    public String getProjectID() {
-        return projectID;
+    //concatenated String with the following ProjectID-creatorID
+
+    public String getProjectAndcreatorID() {
+        return projectAndcreatorID;
     }
 
-    public void setProjectID(String projectID) {
-        this.projectID = projectID;
+    public void setProjectAndcreatorID(String projectAndcreatorID) {
+        this.projectAndcreatorID = projectAndcreatorID;
     }
 
     public String getDescription() {
@@ -65,28 +66,15 @@ public class Project {
         this.taskListIDs = taskListIDs;
     }
 
-    public String getCreatorID() {
-        return creatorID;
+    //as concatenate string of timestamps start and end
+    //format start-end
+
+    public String getProjectStartAndEnd() {
+        return projectStartAndEnd;
     }
 
-    public void setCreatorID(String creatorID) {
-        this.creatorID = creatorID;
-    }
-
-    public Long getStart() {
-        return start;
-    }
-
-    public void setStart(Long start) {
-        this.start = start;
-    }
-
-    public Long getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(Long deadline) {
-        this.deadline = deadline;
+    public void setProjectStartAndEnd(String projectStartAndEnd) {
+        this.projectStartAndEnd = projectStartAndEnd;
     }
 
     public void addParticipantId(String participantID){
@@ -117,4 +105,54 @@ public class Project {
         }
 
     }
+
+    public int getNumberParticipants() {
+        return numberParticipants;
+    }
+
+    public void setNumberParticipants(int numberParticipants) {
+        this.numberParticipants = numberParticipants;
+    }
+
+    public int getNumberTasks() {
+        return numberTasks;
+    }
+
+    public void setNumberTasks(int numberTasks) {
+        this.numberTasks = numberTasks;
+    }
+    public String getProjectID(String projectAndcreatorID){
+        String projectID = null;
+        if (projectAndcreatorID!=null && !projectAndcreatorID.isEmpty()){
+            projectID = projectAndcreatorID.split("-")[0];
+        }
+        return projectID;
+    }
+    public String getCreatorID(String projectAndcreatorID){
+        String CreatorID = null;
+        if (projectAndcreatorID!=null && !projectAndcreatorID.isEmpty()){
+            CreatorID = projectAndcreatorID.split("-")[1];
+        }
+        return CreatorID;
+    }
+
+    public Long getProjectStart(String projectStartAndEnd){
+        long projectStart=0;
+        if (projectStartAndEnd!=null && !projectStartAndEnd.isEmpty()){
+            String projectstart =projectStartAndEnd.split("-")[0];
+            projectStart=Long.valueOf(projectstart);
+        }
+       return projectStart;
+    }
+
+    public Long getProjectEnd(String projectStartAndEnd){
+        long projectEnd = 0;
+        if (projectStartAndEnd!=null && !projectStartAndEnd.isEmpty()){
+            String projectend =projectStartAndEnd.split("-")[1];
+            projectEnd= Long.valueOf(projectend);
+        }
+        return projectEnd;
+    }
+
+
 }
