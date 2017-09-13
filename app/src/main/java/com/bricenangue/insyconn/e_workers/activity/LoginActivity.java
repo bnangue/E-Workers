@@ -133,7 +133,9 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Account account) {
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
-                        final DatabaseReference reference =database.getReference("Users").child(account.getId());
+                        final DatabaseReference reference =database.getReference("Users")
+                                .child(account.getId())
+                                .child("userPublic");
 
                         Map<String,Object> children=new HashMap<>();
 
@@ -193,7 +195,8 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(AccountKitError accountKitError) {
-
+                        Toast.makeText(getApplicationContext(), accountKitError.getErrorType().getMessage()
+                        ,Toast.LENGTH_SHORT).show();
                     }
                 });
 

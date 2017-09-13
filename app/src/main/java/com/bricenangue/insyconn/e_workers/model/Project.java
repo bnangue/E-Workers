@@ -9,9 +9,10 @@ import java.util.ArrayList;
 public class Project {
     private String title, projectAndcreatorID;
     private String description;
-    private int priority, numberParticipants, numberTasks; //0 normal - 1 high
+    private int priority, numberParticipants, numberTasks; //0 normal /-/ 1 high
     private ArrayList<String> participantIDs, taskListIDs;
     private String projectStartAndEnd;
+    public  int DEFAULT_PRIORITY=0;
 
     public Project() {
     }

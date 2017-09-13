@@ -141,6 +141,16 @@
     <string name="textView_hompage_logIn_timeOfDay_default_text">-- : -- : --</string>
     <string name="action_add_favourite">Favorite</string>
     <string name="action_play_next">Play</string>
+    <string name="editText_create_project_hint_title">Title</string>
+    <string name="editText_create_project_hint_description">Description</string>
+    <string name="textView_create_project_buttonstart">Start</string>
+    <string name="text_create_project_buttondeadline_text">Choose a Deadline</string>
+    <string name="textView_create_project_buttonend">End</string>
+    <string name="textView_create_project_buttondeadline">Deadline : </string>
+    <string name="textView_create_project__add_participant">Add Participants</string>
+    <string name="dialog_add_participant_button_text">Add</string>
+    <string name="create">Create</string>
+    <string name="button_date_empty">Please select a deadline to continue</string>
 
 
 </resources>

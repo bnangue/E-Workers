@@ -123,14 +123,26 @@ public class ClientVerificationActivity extends AppCompatActivity {
                                 Map<String,Object> children=new HashMap<>();
                                 children.put("/status",true);
                                 children.put("/registration_date", System.currentTimeMillis());
-                                reference.updateChildren(children);
+                                reference.updateChildren(children).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()){
+                                            startActivity(new Intent(ClientVerificationActivity.this,LoginActivity.class)
+                                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                            userSharedPreference.storeUserEWorkerID(eWorkerID);
+                                            dismissProgressbar();
+                                            finish();
+                                        }else {
+                                            Toast.makeText(ClientVerificationActivity.this,
+                                                    "verification Failed", Toast.LENGTH_SHORT).show();
 
-                                startActivity(new Intent(ClientVerificationActivity.this,LoginActivity.class)
-                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                                userSharedPreference.storeUserEWorkerID(eWorkerID);
-                                dismissProgressbar();
-                                finish();
+                                            dismissProgressbar();
+
+                                        }
+                                    }
+                                });
+
                             }
                         }
 

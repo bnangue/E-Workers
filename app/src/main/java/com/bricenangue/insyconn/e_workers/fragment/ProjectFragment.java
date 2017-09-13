@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.bricenangue.insyconn.e_workers.R;
 import com.bricenangue.insyconn.e_workers.helper.DividerItemDecoration;
 import com.bricenangue.insyconn.e_workers.model.Project;
+import com.bricenangue.insyconn.e_workers.model.User;
+import com.bricenangue.insyconn.e_workers.service.UserSharedPreference;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -39,6 +41,8 @@ public class ProjectFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private UserSharedPreference sharedPreference;
+    private TextView textView;
 
     public ProjectFragment() {
         // Required empty public constructor
@@ -61,7 +65,7 @@ public class ProjectFragment extends Fragment implements SwipeRefreshLayout.OnRe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        sharedPreference=new UserSharedPreference(getContext());
     }
 
     @Override
@@ -75,6 +79,7 @@ public class ProjectFragment extends Fragment implements SwipeRefreshLayout.OnRe
         swipeRefreshLayout=(SwipeRefreshLayout)view.findViewById(R.id.swipe_refresh_layout_project_fragment);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimaryDark);
         swipeRefreshLayout.setOnRefreshListener(this);
+        textView =(TextView)view.findViewById(R.id.textView_fragment_project_new_project_text);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setReverseLayout(true);
@@ -82,6 +87,9 @@ public class ProjectFragment extends Fragment implements SwipeRefreshLayout.OnRe
         recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+        textView.setText("Projects \n"
+                + "Company: "+sharedPreference.getUserEmployeePosition().getCompanyName()
+                +"\nDepartment: "+sharedPreference.getUserEmployeePosition().getDepartmentName());
 
         return view;
     }
@@ -112,7 +120,8 @@ public class ProjectFragment extends Fragment implements SwipeRefreshLayout.OnRe
         swipeRefreshLayout.setRefreshing(true);
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
                 .child("Projects")
-                .child("Innovations");
+                .child(sharedPreference.getUserEmployeePosition().getCompanyName())
+                .child(sharedPreference.getUserEmployeePosition().getDepartmentName());
 
         FirebaseRecyclerAdapter<Project, ProjectViewHolder> adapter =
                 new FirebaseRecyclerAdapter<Project, ProjectViewHolder>(
@@ -134,7 +143,7 @@ public class ProjectFragment extends Fragment implements SwipeRefreshLayout.OnRe
                 long projectEnd = model.getProjectEnd(model.getProjectStartAndEnd());
                 Date projectDeadline= new Date(projectEnd);
 
-                DateFormat df = new SimpleDateFormat("dd MMMM", Locale.FRANCE);
+                DateFormat df = new SimpleDateFormat("dd MMM yy", Locale.FRANCE);
                 viewHolder.projectEnd.setText(df.format(projectDeadline));
                 viewHolder.numberParticipant.setText(String.valueOf(model.getNumberParticipants()));
                 viewHolder.numberTasks.setText(String.valueOf(model.getNumberTasks()));

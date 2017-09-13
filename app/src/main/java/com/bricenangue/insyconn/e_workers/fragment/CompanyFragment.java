@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
@@ -27,6 +28,7 @@ import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -73,9 +75,11 @@ public class CompanyFragment extends Fragment {
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
 
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 1);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+      //  RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+       // recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
        // prepareAlbums();
@@ -92,14 +96,15 @@ public class CompanyFragment extends Fragment {
 
     private void loadFellows(){
         showProgressbar();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
+        Query reference = FirebaseDatabase.getInstance().getReference()
                 .child("Companies")
-                .child(sharedPreference.getUserEmployeePosition().getCompanyName());
+                .child(sharedPreference.getUserEmployeePosition().getCompanyName())
+                .orderByChild("status");
 
         FirebaseRecyclerAdapter<FellowWorkers, FellowsViewHolder> adapter =
                 new FirebaseRecyclerAdapter<FellowWorkers, FellowsViewHolder>(
                         FellowWorkers.class,
-                        R.layout.fellow_card,
+                        R.layout.item_employees,
                         FellowsViewHolder.class,
                         reference
                 ) {
@@ -126,13 +131,6 @@ public class CompanyFragment extends Fragment {
                                     .into(holder.thumbnail);
                         }
 
-
-                        holder.overflow.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                showPopupMenu(holder.overflow);
-                            }
-                        });
                     }
                 };
 
@@ -182,14 +180,13 @@ public class CompanyFragment extends Fragment {
     }
     private static class FellowsViewHolder extends RecyclerView.ViewHolder {
         TextView name, position;
-        ImageView thumbnail, overflow;
+        ImageView thumbnail;
 
         public FellowsViewHolder(View view) {
             super(view);
             name = (TextView) view.findViewById(R.id.name);
             position = (TextView) view.findViewById(R.id.position);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
-            overflow = (ImageView) view.findViewById(R.id.overflow);
         }
     }
     private void showProgressbar(){

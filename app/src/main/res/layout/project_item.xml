@@ -44,7 +44,7 @@
                     android:id="@+id/textView_project_item_deadline"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="12 June"
+                    android:text="12 Septembre 18"
                     android:textStyle="bold"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -58,33 +58,69 @@
             </LinearLayout>
 
 
-            <TextView
-                android:id="@+id/textView_project_item_tasks"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tasks: 0"
-                tools:layout_constraintTop_creator="1"
                 android:layout_marginStart="6dp"
                 android:layout_marginTop="63dp"
-                tools:layout_constraintLeft_creator="1"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginLeft="6dp"
-                />
+                android:id="@+id/textView_project_item_tasks_layout"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView_project_item_participant"
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_format_list_bulleted_black_24dp"/>
+                <TextView
+                    android:id="@+id/textView_project_item_tasks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    tools:layout_constraintTop_creator="1"
+                    tools:layout_constraintLeft_creator="1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginLeft="6dp"
+                    android:textSize="14sp"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Participant: 0"
-                android:layout_marginStart="37dp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/textView_project_item_tasks"
+                android:orientation="horizontal"
+                android:id="@+id/textView_project_item_participant_alyout"
+                android:layout_alignBaseline="@+id/textView_project_item_tasks_layout"
+                android:layout_alignBottom="@+id/textView_project_item_tasks_layout"
+                android:layout_toEndOf="@+id/textView_project_item_tasks_layout"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView_project_item_tasks_layout"
                 tools:layout_constraintBaseline_creator="1"
                 tools:layout_constraintLeft_creator="1"
-                app:layout_constraintLeft_toRightOf="@+id/textView_project_item_tasks"
-                android:layout_alignBaseline="@+id/textView_project_item_tasks"
-                android:layout_alignBottom="@+id/textView_project_item_tasks"
-                android:layout_toEndOf="@+id/textView_project_item_tasks" />
+                app:layout_constraintLeft_toRightOf="@+id/textView_project_item_tasks_layout"
+                android:layout_marginStart="37dp"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_person_black_24dp"
+                    />
+
+                <TextView
+                    android:id="@+id/textView_project_item_participant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="6dp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/textView_project_item_tasks_layout"
+                    tools:layout_constraintBaseline_creator="1"
+                    tools:layout_constraintLeft_creator="1"
+                    app:layout_constraintLeft_toRightOf="@+id/textView_project_item_tasks_layout"
+                    />
+            </LinearLayout>
+
+
 
 
 

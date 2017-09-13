@@ -1,4 +1,4 @@
-package com.app.bricenangue.timeme;
+package com.bricenangue.insyconn.e_workers.alertdialog;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -15,20 +15,20 @@ import java.util.Calendar;
  */
 public class DialogFragmentDatePicker extends DialogFragment implements DatePickerDialog.OnDateSetListener {
     String ddte;
-    boolean boli;
 
 
-    public static DialogFragmentDatePicker newInstance(boolean isStart) {
+
+    public static DialogFragmentDatePicker newInstance() {
         DialogFragmentDatePicker frag = new DialogFragmentDatePicker();
         Bundle args = new Bundle();
-        args.putBoolean("isStart", isStart);
+
 
         frag.setArguments(args);
         return frag;
     }
 
     public interface OnDateGet{
-        public void dateSet(String date,boolean isstart);
+        public void dateSet(String date);
     }
 
    private OnDateGet dateGet;
@@ -48,7 +48,6 @@ public class DialogFragmentDatePicker extends DialogFragment implements DatePick
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the current date as the default date in the picker
 
-        boli=getArguments().getBoolean("isStart");
             final Calendar c = Calendar.getInstance();
             int year = c.get(Calendar.YEAR);
             int month = c.get(Calendar.MONTH);
@@ -63,13 +62,13 @@ public class DialogFragmentDatePicker extends DialogFragment implements DatePick
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
             // Do something with the date chosen by the user
-            Calendar cal=Calendar.getInstance();
+            Calendar cal= Calendar.getInstance();
             cal.set(Calendar.YEAR,year);
             cal.set(Calendar.MONTH,month);
             cal.set(Calendar.DAY_OF_MONTH,day);
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
             ddte=formatter.format(cal.getTimeInMillis());
-            dateGet.dateSet(ddte,boli);
+            dateGet.dateSet(ddte);
            // dateGet.dateSet(year,month,day);
         }
 

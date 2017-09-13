@@ -1,19 +1,26 @@
 package com.bricenangue.insyconn.e_workers.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bricenangue.insyconn.e_workers.R;
+import com.bricenangue.insyconn.e_workers.activity.CreateTaskActivity;
 import com.bricenangue.insyconn.e_workers.helper.DividerItemDecoration;
 import com.bricenangue.insyconn.e_workers.model.Project;
 import com.bricenangue.insyconn.e_workers.model.ProjectsTask;
@@ -88,6 +95,7 @@ public class TasksFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tasks, container, false);
         recyclerView=(RecyclerView)view.findViewById(R.id.recycler_view_task_fragment);
@@ -155,6 +163,9 @@ public class TasksFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                 };
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        if(adapter.getItemCount()==0 ){
+            swipeRefreshLayout.setRefreshing(false);
+        }
 
     }
     public static class TaskViewHolder extends RecyclerView.ViewHolder{
@@ -176,4 +187,30 @@ public class TasksFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
         }
     }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+       inflater.inflate(R.menu.menu_create_task,menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_menu_create_task) {
+            startActivity(new Intent(getActivity(), CreateTaskActivity.class));
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
 }

@@ -91,7 +91,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.bricenangue.insyconn.e_workers.activity.HomePageActivity" />
         </activity>
-        <activity android:name=".activity.ClientVerificationActivity"></activity>
+        <activity android:name=".activity.ClientVerificationActivity" />
+        <activity android:name=".activity.CreateProjectActivity" />
+        <activity android:name=".activity.CreateTaskActivity"></activity>
     </application>
 
 </manifest>

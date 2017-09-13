@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/imageView_Fragment_Profile_Header"
         android:layout_width="0dp"
-        android:layout_height="181dp"
+        android:layout_height="250dp"
         android:scaleType="centerCrop"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"

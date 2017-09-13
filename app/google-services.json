@@ -15,10 +15,70 @@
       },
       "oauth_client": [
         {
+          "client_id": "1030067849217-j48i94vjg5q9qgqr4uek9sqhacub3bm6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bricenangue.insyconn.e_workers",
+            "certificate_hash": "60469549c448a98d1921036ea850017857422891"
+          }
+        },
+        {
           "client_id": "1030067849217-n9l08l98ki950rq7h71bsfm2t6qklvo7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.bricenangue.insyconn.e_workers",
+            "certificate_hash": "881b425908aacfff27e4c3eac32663f5de08d1d9"
+          }
+        },
+        {
+          "client_id": "1030067849217-gok1sttdiic7fk1mtfbt259ood0r2evo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcBsrz02ZGhCbq8BCN_EG548Juxj5Wvts"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1030067849217-gok1sttdiic7fk1mtfbt259ood0r2evo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1030067849217:android:495e96fe9e07e165",
+        "android_client_info": {
+          "package_name": "com.bricenangue.insyconn.e_workersmanagement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1030067849217-kmhqpnvonkgnee35sqf78ahjn1un4tj6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bricenangue.insyconn.e_workersmanagement",
+            "certificate_hash": "60469549c448a98d1921036ea850017857422891"
+          }
+        },
+        {
+          "client_id": "1030067849217-jlfu3i12br6vjehaqihfl5024pvm3qns.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bricenangue.insyconn.e_workersmanagement",
             "certificate_hash": "881b425908aacfff27e4c3eac32663f5de08d1d9"
           }
         },

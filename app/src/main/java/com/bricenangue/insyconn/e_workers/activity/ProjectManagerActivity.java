@@ -2,6 +2,7 @@ package com.bricenangue.insyconn.e_workers.activity;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -38,7 +39,7 @@ public class ProjectManagerActivity extends AppCompatActivity {
     private void selectFragment(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.navigation_new_project:
-                showcreateNewDialog();
+                startActivity(new Intent(this, CreateProjectActivity.class));
 
                 break;
             case R.id.navigation_dashboard:
@@ -59,27 +60,7 @@ public class ProjectManagerActivity extends AppCompatActivity {
         }
     }
 
-    private void showcreateNewDialog(){
 
-        AlertDialog.Builder builder =new AlertDialog.Builder(this)
-                .setTitle("Create New Project")
-                .setCancelable(true)
-                .setNegativeButton("Create", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                })
-                .setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-        builder.create().show();
-
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
